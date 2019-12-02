@@ -12,12 +12,18 @@
 	"parserOptions": {
 		"ecmaVersion": 2018
 	},
-	"plugins": ["prettier"],
 	"rules": {
 		"prettier/prettier": "warn",
-		"no-unused-vars": "error",
+		"no-unused-vars": "warn",
+		"func-names": "off",
+		"object-shorthand": "off",
+		"no-use-before-define": "off",
+		"no-console": "warn",
+		"no-else-return": "warn",
 		"no-underscore-dangle": "off",
-		"no-shadow": "off",
-		"no-param-reassign": "warn"
+		"prefer-const": "off",
+		"consistent-return": "warn",
+		"no-plusplus": "off",
+		"no-await-in-loop": "off"
 	}
 }
