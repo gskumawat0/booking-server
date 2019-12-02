@@ -4,7 +4,7 @@
 		"commonjs": true,
 		"es6": true
 	},
-	"extends": ["airbnb-base"],
+	"extends": ["airbnb-base", "plugin:node/recommended", "prettier"],
 	"globals": {
 		"Atomics": "readonly",
 		"SharedArrayBuffer": "readonly"
@@ -12,6 +12,7 @@
 	"parserOptions": {
 		"ecmaVersion": 2018
 	},
+	"plugins": ["prettier"],
 	"rules": {
 		"prettier/prettier": "warn",
 		"no-unused-vars": "error",

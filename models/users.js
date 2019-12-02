@@ -25,6 +25,11 @@ const User = new Schema({
 	createdOn: {
 		type: Date,
 		default: Date.now
+	},
+	status: {
+		// 0 - pending, 1- active, 2-suspended
+		type: Number,
+		default: 0
 	}
 });
 

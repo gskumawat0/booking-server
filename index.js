@@ -10,6 +10,16 @@ const morgan = require('morgan');
 const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 
+//models
+const User = require('./models/users');
+
+//routes
+const authRoutes = require('./routes/auth');
+const packageRoutes = require('./routes/packages');
+const driverRoutes = require('./routes/drivers');
+const vehicleRoutes = require('./routes/vehicles');
+const bookingRoute = require('./routes/bookings');
+
 let { SESSION_SECRET, DB_URI, NODE_ENV, PORT, JWT_SECRET } = process.env;
 if (NODE_ENV === 'development') {
 	mongoose.set('debug', true);
@@ -66,7 +76,7 @@ app.get('/', async function(req, res) {
 	try {
 		return res.json({
 			success: true,
-			message: `wow!! server is working.`
+			message: `server is up and running. signin and play around`
 		});
 	} catch (err) {
 		return res.json({
@@ -75,6 +85,11 @@ app.get('/', async function(req, res) {
 		});
 	}
 });
+
+app.use('/packages', packageRoutes);
+app.use('/bookings', bookingRoute);
+app.use('/auth', authRoutes);
+app.use('/vehicles', vehicleRoutes);
 
 app.all('*', (req, res) => {
 	res.status(404).json({
@@ -94,5 +109,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT || 3000, () => {
-	console.log(`server is running on port: ${process.env.PORT},`);
+	console.log(`server is running on port: ${PORT},`);
 });
