@@ -1,17 +1,19 @@
 const router = require('express').Router({ mergeParams: true });
 const passport = require('passport');
 const vehicleController = require('../controllers/vehicles.js');
-router.use(verifyJwtToken, passport.authenticate('customerStrategy', { session: false }));
+const { checkJwtToken } = require('../middlewares/verifyJwt');
+
+router.use(checkJwtToken, passport.authenticate('userStrategy', { session: false }));
 
 router
 	.route('/')
-	.get(vehicleController.getDrivers)
-	.post(vehicleController.addDriver);
+	.get(vehicleController.getVehicles)
+	.post(vehicleController.addVehicle);
 
 router
 	.route('/:vehicleId')
-	.get(vehicleController.getDriverDetails)
-	.put(vehicleController.updateDriver)
-	.delete(vehicleController.deleteDriver);
+	.get(vehicleController.getVehicleDetails)
+	.put(vehicleController.updateVehicle)
+	.delete(vehicleController.deleteVehicle);
 
 module.exports = router;

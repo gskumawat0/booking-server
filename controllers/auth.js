@@ -29,7 +29,7 @@ const signup = async function(req, res) {
 			.toString()
 			.substr(0, 6);
 		await Token.create({ user: user._id, token: token });
-		let res = await sendVerificationEmail({ user, token });
+		await sendVerificationEmail({ user, token });
 		return res.json({
 			success: true,
 			message: `verification email sent to ${email}.`
@@ -41,8 +41,8 @@ const signup = async function(req, res) {
 
 const signin = async function(req, res) {
 	try {
-		let { contact, password } = req.body;
-		const user = await User.findOne({ contact });
+		let { email, password } = req.body;
+		const user = await User.findOne({ email });
 		if (!user) throw Error('user not found');
 		const passwordMatched = await bcrypt.compareSync(password, user.password);
 		if (!passwordMatched) {

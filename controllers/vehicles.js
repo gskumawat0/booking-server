@@ -3,7 +3,7 @@ const { errorHandler } = require('../libs/error');
 
 const getVehicles = async function(req, res) {
 	try {
-		const vehicles = Vehicle.find({});
+		const vehicles = await Vehicle.find({});
 		return res.json({
 			success: true,
 			vehicles
@@ -15,7 +15,7 @@ const getVehicles = async function(req, res) {
 
 const addVehicle = async function(req, res) {
 	try {
-		const vehicle = Vehicle.create({ ...req.body });
+		const vehicle = await Vehicle.create({ ...req.body });
 		return res.json({
 			success: true,
 			vehicle
@@ -25,11 +25,11 @@ const addVehicle = async function(req, res) {
 	}
 };
 
-const getVehicle = async function(req, res) {
+const getVehicleDetails = async function(req, res) {
 	try {
 		let { vehicleId } = req.params;
 
-		const vehicle = Vehicle.findOne({ _id: vehicleId });
+		const vehicle = await Vehicle.findOne({ _id: vehicleId });
 		return res.json({
 			success: true,
 			vehicle
@@ -42,7 +42,7 @@ const getVehicle = async function(req, res) {
 const updateVehicle = async function(req, res) {
 	try {
 		let { vehicleId } = req.params;
-		const vehicle = Vehicle.findOneAndUpdate({ _id: vehicleId }, { $set: { ...req.body } }, { new: true });
+		const vehicle = await Vehicle.findOneAndUpdate({ _id: vehicleId }, { $set: { ...req.body } }, { new: true });
 		return res.json({
 			success: true,
 			vehicle
@@ -55,7 +55,7 @@ const updateVehicle = async function(req, res) {
 const deleteVehicle = async function(req, res) {
 	try {
 		let { vehicleId } = req.params;
-		const vehicle = Vehicle.findOneAndDelete({ _id: vehicleId });
+		const vehicle = await Vehicle.findOneAndDelete({ _id: vehicleId });
 		return res.json({
 			success: true,
 			vehicle
@@ -68,7 +68,7 @@ const deleteVehicle = async function(req, res) {
 module.exports = {
 	getVehicles,
 	addVehicle,
-	getVehicle,
+	getVehicleDetails,
 	updateVehicle,
 	deleteVehicle
 };

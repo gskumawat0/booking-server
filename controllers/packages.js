@@ -3,7 +3,7 @@ const { errorHandler } = require('../libs/error');
 
 const getPackages = async function(req, res) {
 	try {
-		const packages = Package.find({});
+		const packages = await Package.find({});
 		return res.json({
 			success: true,
 			packages
@@ -15,7 +15,7 @@ const getPackages = async function(req, res) {
 
 const addPackage = async function(req, res) {
 	try {
-		const package = Package.create({ ...req.body });
+		const package = await Package.create({ ...req.body });
 		return res.json({
 			success: true,
 			package
@@ -25,11 +25,11 @@ const addPackage = async function(req, res) {
 	}
 };
 
-const getPackage = async function(req, res) {
+const getPackageDetails = async function(req, res) {
 	try {
 		let { packageId } = req.params;
 
-		const package = Package.findOne({ _id: packageId });
+		const package = await Package.findOne({ _id: packageId });
 		return res.json({
 			success: true,
 			package
@@ -42,7 +42,7 @@ const getPackage = async function(req, res) {
 const updatePackage = async function(req, res) {
 	try {
 		let { packageId } = req.params;
-		const package = Package.findOneAndUpdate({ _id: packageId }, { $set: { ...req.body } }, { new: true });
+		const package = await Package.findOneAndUpdate({ _id: packageId }, { $set: { ...req.body } }, { new: true });
 		return res.json({
 			success: true,
 			package
@@ -55,7 +55,7 @@ const updatePackage = async function(req, res) {
 const deletePackage = async function(req, res) {
 	try {
 		let { packageId } = req.params;
-		const package = Package.findOneAndDelete({ _id: packageId });
+		const package = await Package.findOneAndDelete({ _id: packageId });
 		return res.json({
 			success: true,
 			package
@@ -68,7 +68,7 @@ const deletePackage = async function(req, res) {
 module.exports = {
 	getPackages,
 	addPackage,
-	getPackage,
+	getPackageDetails,
 	updatePackage,
 	deletePackage
 };

@@ -1,7 +1,9 @@
 const router = require('express').Router({ mergeParams: true });
 const passport = require('passport');
 const driverController = require('../controllers/drivers.js');
-router.use(verifyJwtToken, passport.authenticate('customerStrategy', { session: false }));
+const { checkJwtToken } = require('../middlewares/verifyJwt');
+
+router.use(checkJwtToken, passport.authenticate('userStrategy', { session: false }));
 
 router
 	.route('/')

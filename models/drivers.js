@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const {Schema} = mongoose;
 
 let driverSchema = new Schema({
 	name: {
@@ -31,8 +32,9 @@ let driverSchema = new Schema({
 		default: 'A'
 	},
 	charges: {
+		// per day
 		type: Number,
-		default: 10
+		default: 300
 	},
 	address: {
 		type: String

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 const { Schema } = mongoose;
-const User = new Schema({
+const packageSchema = new Schema({
 	title: {
 		type: String,
 		default: 'Airport Package'
@@ -20,7 +20,8 @@ const User = new Schema({
 	},
 	origin: {
 		type: {
-			type: 'Point'
+			type: String,
+			default: 'Point'
 		},
 		coordinates: {
 			type: [Number],
@@ -40,4 +41,4 @@ const User = new Schema({
 	}
 });
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('Package', packageSchema);

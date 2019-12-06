@@ -36,9 +36,9 @@ mongoose
 	.catch(err => console.log(err.message));
 
 app.use(cors());
+app.use(morgan('dev'));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json({}));
-app.use(morgan('dev'));
 
 // session config
 app.use(
@@ -88,6 +88,7 @@ app.get('/', async function(req, res) {
 
 app.use('/packages', packageRoutes);
 app.use('/bookings', bookingRoute);
+app.use('/drivers', driverRoutes);
 app.use('/auth', authRoutes);
 app.use('/vehicles', vehicleRoutes);
 
