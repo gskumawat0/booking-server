@@ -9,11 +9,11 @@ const passport = require('passport');
 const morgan = require('morgan');
 const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
-
-//models
+const rateLimiter = require('./middlewares/rateLimiter');
+// models
 const User = require('./models/users');
 
-//routes
+// routes
 const authRoutes = require('./routes/auth');
 const packageRoutes = require('./routes/packages');
 const driverRoutes = require('./routes/drivers');
@@ -39,7 +39,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json({}));
-
+app.use(rateLimiter);
 // session config
 app.use(
 	session({
