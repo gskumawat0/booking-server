@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
+
 const { Schema } = mongoose;
 const packageSchema = new Schema({
 	title: {
@@ -11,11 +12,11 @@ const packageSchema = new Schema({
 		default: 1500
 	},
 	description: {
-		//use new line (\n) seperator for multiple lines
+		// use new line (\n) seperator for multiple lines
 		type: String
 	},
 	terms: {
-		//use new line (\n) seperator for multiple lines
+		// use new line (\n) seperator for multiple lines
 		type: String
 	},
 	origin: {
@@ -25,7 +26,7 @@ const packageSchema = new Schema({
 		},
 		coordinates: {
 			type: [Number],
-			default: [77.7000761, 13.1988951] //[lng, lat], bengaluru airport
+			default: [77.7000761, 13.1988951] // [lng, lat], bengaluru airport
 		}
 	},
 	expireOn: {
